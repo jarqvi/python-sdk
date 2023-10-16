@@ -31,6 +31,7 @@ files_to_delete=(
     setup.cfg
     test-requirements.txt
     tox.ini
+    setup.py
 )
 
 # Loop through directories and delete specified files

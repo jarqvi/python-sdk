@@ -44,4 +44,4 @@ services:
       generate
       -i https://openapi.liara.ir/object-storage.yaml
       -g python
-      -o /local/object-storage
+      -o /local/object_storage
