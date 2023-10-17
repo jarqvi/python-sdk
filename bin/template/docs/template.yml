@@ -192,56 +192,587 @@ sdks:
                 except ApiException as e:
                     print(e)
   mail:
-    readme:
+    readme: |
+      import mail.openapi_client
+      from mail.openapi_client.models.mail_servers import MailServers
+      from mail.openapi_client.rest import ApiException
+      from pprint import pprint
+
+      with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+          api_instance = mail.openapi_client.MailsApi(api_client)
+
+          try:
+              api_response: MailServers = api_instance.get_mails()
+              
+              pprint(api_response)
+          except ApiException as e:
+              print(e)
     classes:
       AccountsApi:
         examples:
-          checkMailAvailable:
-          createMailACcount:
-          deleteMailAccount:
-          getAllMailAccounts:
+          check_mail_available: |
+            import mail.openapi_client
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.AccountsApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                account_name = 'account_name_example' 
+
+                try:
+                    api_response: PostMails201Response = api_instance.check_mail_available(mail_server_id, account_name)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          create_mail_a_ccount: |
+            import mail.openapi_client
+            from mail.openapi_client.models.model5 import Model5
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.AccountsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                body: Model5 = mail.openapi_client.Model5(name = 'name_example')
+
+                try:
+                    api_response: PostMails201Response = api_instance.create_mail_a_ccount(mail_server_id, body=body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_mail_account: |
+            import mail.openapi_client
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.AccountsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                account_id = 'account_id_example'
+
+                try:
+                    api_instance.delete_mail_account(mail_server_id, account_id)
+                except ApiException as e:
+                    print(e)
+          get_all_mail_accounts: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_accounts import MailAccounts
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.AccountsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+
+                try:
+                    api_response: MailAccounts = api_instance.get_all_mail_accounts(mail_server_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       AttachmentsApi:
         examples:
-          downloadAttachments:
-          getAllAttachments:
+          downloadAttachments: |
+            import mail.openapi_client
+            from mail.openapi_client.models.download_attachments200_response import DownloadAttachments200Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.AttachmentsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                message_id = 'message_id_example'
+                attachment_id = 'attachment_id_example'
+
+                try:
+                    api_response: DownloadAttachments200Response = api_instance.download_attachments(mail_server_id, message_id, attachment_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_all_attachments: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_attachments import MailAttachments
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.AttachmentsApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                message_id = 'message_id_example'
+
+                try:
+                    api_response: MailAttachments = api_instance.get_all_attachments(mail_server_id, message_id)        
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       EventApi:
         examples:
-          getAllEvents:
+          get_all_events: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_events import MailEvents
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.EventApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                message_id = 'message_id_example' 
+                page = 1 
+                count = 15 
+
+                try:
+                    api_response: MailEvents = api_instance.get_all_events(mail_server_id, message_id, page=page, count=count)        
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       ForwardApi:
         examples:
-          createAddressForwarding:
-          deleteExtraEndpoint:
-          getListAddressForwarding:
+          create_address_forwarding: |
+            import mail.openapi_client
+            from mail.openapi_client.models.model6 import Model6
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.ForwardApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                account_id = 'account_id_example' 
+                body: Model6 = mail.openapi_client.Model6(address = 'example_address')
+
+                try:
+                    api_response: PostMails201Response = api_instance.create_address_forwarding(mail_server_id, account_id, body=body)       
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_extra_endpoint: |
+            import mail.openapi_client
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.ForwardApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                account_id = 'account_id_example'
+                address_id = 'address_id_example'
+
+                try:
+                    api_instance.delete_extra_endpoint(mail_server_id, account_id, address_id)  
+                except ApiException as e:
+                    print(e)
+          get_list_address_forwarding: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_forwards import MailForwards
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.ForwardApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                account_id = 'account_id_example'
+                
+                try:
+                    api_response: MailForwards = api_instance.get_list_address_forwarding(mail_server_id, account_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       InboundrulesApi:
         examples:
-          addInboundRule:
-          deleteInboundRule:
-          getAllInboundRules:
+          add_inbound_rule: |
+            import mail.openapi_client
+            from mail.openapi_client.models.model11 import Model11
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.InboundrulesApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                model11: Model11 = mail.openapi_client.Model11(rule = 'rule_example')
+                
+                try:
+                    api_response: PostMails201Response = api_instance.add_inbound_rule(mail_server_id, model11=model11)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_inbound_rule: |
+            import mail.openapi_client
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.InboundrulesApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                inboundrule_id = 'inboundrule_id_example'
+                
+                try:
+                    api_instance.delete_inbound_rule(mail_server_id, inboundrule_id)
+                except ApiException as e:
+                    print(e)
+          get_all_inbound_rules: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_inbound_rules import MailInboundRules
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.InboundrulesApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                
+                try:
+                    api_response: MailInboundRules = api_instance.get_all_inbound_rules(mail_server_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       MailsApi:
         examples:
-          changeMailServerPlan:
-          checkDomainAvailable:
-          checkMailServerDnsStatus:
-          deleteMailServer:
-          getCountFreeMails:
-          getCountMails:
-          getMails:
-          getSingleMailServer:
-          postMails:
-          editMailServer:
+          change_mail_server_plan: |
+            import mail.openapi_client
+            from mail.openapi_client.models.model10 import Model10
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                body: Model10 = mail.openapi_client.Model10(plan = 'plan_example')
+                
+                try:
+                    api_response = api_instance.change_mail_server_plan(mail_server_id, body=body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          check_domain_available: |
+            import mail.openapi_client
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                domain = 'domain_example'
+                
+                try:
+                    api_response: PostMails201Response = api_instance.check_domain_available(domain)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          check_mail_server_dns_status: |
+            import mail.openapi_client
+            from mail.openapi_client.models.check_dns import CheckDNS
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                
+                try:
+                    api_response: CheckDNS = api_instance.check_mail_server_dns_status(mail_server_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_mail_server: |
+            import mail.openapi_client
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                
+                try:
+                    api_instance.delete_mail_server(mail_server_id)
+                except ApiException as e:
+                    print(e)
+          edit_mail_server: |
+            import mail.openapi_client
+            from mail.openapi_client.mode`ls.model8 import Model8
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                body: Model8 = mail.openapi_client.Model8(mode = 'dev', inboundSpamThreshold = 0)
+                
+                try:
+                    api_response: PostMails201Response = api_instance.edit_mail_server(mail_server_id, body=body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)`
+          get_count_free_mails: |
+            import mail.openapi_client
+            from mail.openapi_client.models.remaining_free_mails import RemainingFreeMails
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                
+                try:
+                    api_response: RemainingFreeMails = api_instance.get_count_free_mails(mail_server_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_count_mails: |
+            import mail.openapi_client
+            from mail.openapi_client.models.count_mail_per_day import CountMailPerDay
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                last_n_days = 30 
+                
+                try:
+                    api_response: CountMailPerDay = api_instance.get_count_mails(mail_server_id, last_n_days=last_n_days)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_mails: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_servers import MailServers
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+
+                try:
+                    api_response: MailServers = api_instance.get_mails()
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_single_mail_server: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_server import MailServer
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                
+                try:
+                    api_response: MailServer = api_instance.get_single_mail_server(mail_server_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          post_mails: |
+            import mail.openapi_client
+            from mail.openapi_client.models.model1 import Model1
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MailsApi(api_client)
+                body: Model1 = mail.openapi_client.Model1(plan = 'plan_example', domain = 'domain_example', mode = 'DEV')
+                
+                try:
+                    api_response: PostMails201Response = api_instance.post_mails(body=body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       MessagesApi:
         examples:
-          generateTemporary:
-          getAllMails:
-          getSingleMail:
-          getSingleMailHtml:
-          sendMail:
+          generate_temporary: |
+            import mail.openapi_client
+            from mail.openapi_client.models.tmp_access import TmpAccess
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MessagesApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                message_id = 'message_id_example'
+                expiration = 1
+
+                try:
+                    api_response: TmpAccess = api_instance.generate_temporary(mail_server_id, message_id, expiration=expiration)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_all_mails: |
+            import mail.openapi_client
+            from mail.openapi_client.models.mail_messages import MailMessages
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MessagesApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                direction = 'direction_example'
+                page = 1
+                count = 15
+                state = 'state_example'
+                subject = 'subject_example'
+                var_from = 'var_from_example'
+                to = 'to_example'
+
+                try:
+                    api_response: MailMessages = api_instance.get_all_mails(mail_server_id, direction, page=page, count=count, state=state, subject=subject, var_from=var_from, to=to)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_single_mail: |
+            import mail.openapi_client
+            from mail.openapi_client.models.get_single_mail200_response import GetSingleMail200Response
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MessagesApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                message_id = 'message_id_example'
+
+                try:
+                    api_response: GetSingleMail200Response = api_instance.get_single_mail(mail_server_id, message_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_single_mail_html: |
+            import mail.openapi_client
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MessagesApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                message_id = 'message_id_example'
+                token = 'token_example'
+
+                try:
+                    api_instance.get_single_mail_html(mail_server_id, message_id, token)
+                except ApiException as e:
+                    print(e)
+          send_mail: |
+            import mail.openapi_client
+            from mail.openapi_client.models.post_mails201_response import PostMails201Response
+            from mail.openapi_client.models.model3 import Model3
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.MessagesApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                body: Model3 = mail.openapi_client.Model3(
+                    html = 'html_example',
+                    text = 'text_example',
+                    subject = 'subject_example',
+                    to = 'to_example',
+                    var_from = 'var_from_example',
+                    reply_to = 'reply_to_example',
+                    attachments = {
+                        "name" : "name_example",
+                        "content_type": "content_type_example",
+                        "data": "data_example"
+                    }
+                )
+
+                try:
+                    api_response: PostMails201Response = api_instance.send_mail(mail_server_id, body=body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       SmtpApi:
         examples:
-          deleteSmtpCredential:
-          generateCredentials:
-          getCredential:
-          revokeCredentials:
+          delete_smtp_credential: |
+            import mail.openapi_client
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.SmtpApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                username = 'username_example'
+
+                try:
+                    api_instance.delete_smtp_credential(mail_server_id, username)
+                except ApiException as e:
+                    print(e)
+          generate_credentials: |
+            import mail.openapi_client
+            from mail.openapi_client.models.create_smtp import CreateSMTP
+            from mail.openapi_client.models.model4 import Model4
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.SmtpApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+                body: Model4 = mail.openapi_client.Model4(description = "description_example")
+
+                try:
+                    api_response: CreateSMTP = api_instance.generate_credentials(mail_server_id, body=body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_credential: |
+            import mail.openapi_client
+            from mail.openapi_client.models.smtp import SMTP
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.SmtpApi(api_client)
+                mail_server_id = 'mail_server_id_example'
+
+                try:
+                    api_response: SMTP = api_instance.get_credential(mail_server_id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          revoke_credentials: |
+            import mail.openapi_client
+            from mail.openapi_client.models.create_smtp import CreateSMTP
+            from mail.openapi_client.models.model9 import Model9
+            from mail.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = mail.openapi_client.SmtpApi(api_client)
+                mail_server_id = 'mail_server_id_example' 
+                body: Model9 = mail.openapi_client.Model9(username = 'username_example')
+
+                try:
+                    api_response: CreateSMTP = api_instance.revoke_credentials(mail_server_id, body=body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
   paas:
     readme: |
       import paas.openapi_client
