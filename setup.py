@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "openapi-client"
+NAME = "jarqvi-openapi-client"
 VERSION = "1.0.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
@@ -48,4 +48,5 @@ setup(
     Manage your services using our API 
     """,  # noqa: E501
     package_data={"openapi_client": ["py.typed"]},
+    setup_requires=['wheel']
 )
