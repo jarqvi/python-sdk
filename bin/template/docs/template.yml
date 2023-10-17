@@ -1,23 +1,196 @@
 sdks:
   dns:
-    readme:
+    readme: |
+      import dns.openapi_client
+      from dns.openapi_client.models.zones import Zones
+      from dns.openapi_client.rest import ApiException
+      from pprint import pprint
+
+      with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+          api_instance = dns.openapi_client.ZoneApi(api_client)
+          try:
+              api_response: Zones = api_instance.get_list_zones()
+              
+              pprint(api_response)
+          except ApiException as e:
+              print(e)
     classes:
       ZoneApi:
         examples:
-          createZone:
-          deleteZone:
-          getListZones:
-          getZone:
+          create_zone: |
+            import dns.openapi_client
+            from dns.openapi_client.models.create_zone import CreateZone
+            from dns.openapi_client.models.create_zone_request import CreateZoneRequest
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.ZoneApi(api_client)
+                zone_struct: CreateZoneRequest = dns.openapi_client.CreateZoneRequest(name = "example.com")
+                
+                try:
+                    api_response: CreateZone = api_instance.create_zone(zone_struct)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_zone: |
+            import dns.openapi_client
+            from dns.openapi_client.models.submitted import Submitted
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.ZoneApi(api_client)
+                zone = 'example.com'
+                
+                try:
+                    api_response: Submitted = api_instance.delete_zone(zone)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_list_zones: |
+            import dns.openapi_client
+            from dns.openapi_client.models.zones import Zones
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.ZoneApi(api_client)
+                try:
+                    api_response: Zones = api_instance.get_list_zones()
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_zone: |
+            import dns.openapi_client
+            from dns.openapi_client.models.create_zone import CreateZone
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.ZoneApi(api_client)
+                zone = 'example.com'
+                
+                try:
+                    api_response: CreateZone = api_instance.get_zone(zone)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       CheckNameServersApi:
         examples:
-          checkNameServer:
+          check_name_server: |
+            import dns.openapi_client
+            from dns.openapi_client.models.submitted import Submitted
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.CheckNameServersApi(api_client)
+                zone = 'example.com'
+                
+                try:
+                    api_response: Submitted = api_instance.check_name_server(zone)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       DnsRecordApi:
         examples:
-          createDnsRecord:
-          deleteDnsRecord:
-          editDnsRecord:
-          getDnsRecord:
-          getListDnsRecords:
+          create_dns_record: |
+            import dns.openapi_client
+            from dns.openapi_client.models.dns_record_response import DnsRecordResponse
+            from dns.openapi_client.models.dns_record import DnsRecord
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.DnsRecordApi(api_client)
+                zone = 'example.com'
+                dns_record: DnsRecord = dns.openapi_client.DnsRecord(
+                    name = "tesst", type = "A", ttl = 3600, contents = [{
+                        "ip": "1.2.3.4"
+                    }]
+                )
+                
+                try:
+                    api_response: DnsRecordResponse = api_instance.create_dns_record(zone, dns_record)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_dns_record: |
+            import dns.openapi_client
+            from dns.openapi_client.rest import ApiException
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.DnsRecordApi(api_client)
+                zone = 'example.com'
+                id = 'example-id'
+                
+                try:
+                    api_instance.delete_dns_record(zone, id)
+                except ApiException as e:
+                    print(e)
+          edit_dns_record: |
+            import dns.openapi_client
+            from dns.openapi_client.models.dns_record_response import DnsRecordResponse
+            from dns.openapi_client.models.dns_record import DnsRecord
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.DnsRecordApi(api_client)
+                zone = 'example.com'
+                id = 'example-id'
+                dns_record: DnsRecord = dns.openapi_client.DnsRecord(
+                    name = "tesst", type = "A", ttl = 7200, contents = [{
+                        "ip": "4.3.2.1"
+                    }]
+                )
+                
+                try:
+                    api_response: DnsRecordResponse = api_instance.edit_dns_record(zone, id, dns_record)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_dns_record: |
+            import dns.openapi_client
+            from dns.openapi_client.models.dns_record_response import DnsRecordResponse
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.DnsRecordApi(api_client)
+                zone = 'example.com'
+                id = 'example-id'
+                
+                try:
+                    api_response: DnsRecordResponse = api_instance.get_dns_record(zone, id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_list_dns_records: |
+            import dns.openapi_client
+            from dns.openapi_client.models.all_dns_record_response import AllDnsRecordResponse
+            from dns.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dns.openapi_client.DnsRecordApi(api_client)
+                zone = 'example.com'
+                
+                try:
+                    api_response: AllDnsRecordResponse = api_instance.get_list_dns_records(zone)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
   mail:
     readme:
     classes:
@@ -70,7 +243,20 @@ sdks:
           getCredential:
           revokeCredentials:
   paas:
-    readme:
+    readme: |
+      import paas.openapi_client
+      from paas.openapi_client.models.projects import Projects
+      from paas.openapi_client.rest import ApiException
+      from pprint import pprint
+
+      with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+          api_instance = paas.openapi_client.AppsApi(api_client)
+          try:
+              api_response: Projects = api_instance.get_apps()
+              
+              pprint(api_response)
+          except ApiException as e:
+              print(e)
     classes:
       AppsApi:
         examples:
@@ -81,7 +267,20 @@ sdks:
           getAppByName:
           getAppLogs:
           getAppReleases:
-          getApps:
+          get_apps: |
+            import paas.openapi_client
+            from paas.openapi_client.models.projects import Projects
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                try:
+                    api_response: Projects = api_instance.get_apps()
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
           restartApp:
           turnApp:
       DeployApi:
