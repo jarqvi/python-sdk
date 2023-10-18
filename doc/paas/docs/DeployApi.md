@@ -19,45 +19,27 @@ deploy releases that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.deploy_releases import DeployReleases
-from openapi_client.models.releases_deploy200_response import ReleasesDeploy200Response
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.deploy_releases import DeployReleases
+from paas.openapi_client.models.releases_deploy200_response import ReleasesDeploy200Response
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DeployApi(api_client)
-    name = 'name_example' # str | The name of your app for deploy
-    deploy_releases = openapi_client.DeployReleases() # DeployReleases | 
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DeployApi(api_client)
+    name = 'example_name'
+    deploy_releases: DeployReleases = paas.openapi_client.DeployReleases()
+    deploy_releases.source_id = 'example_source_id'
+    deploy_releases.type = 'example_type'
+    deploy_releases.port = 3000
 
     try:
-        # Deploy releases
-        api_response = api_instance.releases_deploy(name, deploy_releases)
-        print("The response of DeployApi->releases_deploy:\n")
+        api_response: ReleasesDeploy200Response = api_instance.releases_deploy(name, deploy_releases)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeployApi->releases_deploy: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -103,44 +85,23 @@ deploy sources code that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.sources_deploy200_response import SourcesDeploy200Response
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.sources_deploy200_response import SourcesDeploy200Response
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DeployApi(api_client)
-    name = 'name_example' # str | The name of your app for deploy
-    file = None # bytearray | The .gz file to deploy
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DeployApi(api_client)
+    name = 'example'
+    file = './example.tar.gz'
 
     try:
-        # Deploy sources code
-        api_response = api_instance.sources_deploy(name, file)
-        print("The response of DeployApi->sources_deploy:\n")
+        api_response: SourcesDeploy200Response = api_instance.sources_deploy(name, file)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeployApi->sources_deploy: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

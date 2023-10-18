@@ -21,41 +21,20 @@ default subdomain that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SettingsApi(api_client)
-    id = 'id_example' # str | 
-    status = 'status_example' # str | disable or enable
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.SettingsApi(api_client)
+    id = 'id_example'
+    status = 'status_example'
+    
     try:
-        # Default subdomain
         api_instance.default_subdomain(id, status)
-    except Exception as e:
-        print("Exception when calling SettingsApi->default_subdomain: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -102,44 +81,23 @@ ip static that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.ip_static200_response import IpStatic200Response
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.ip_static200_response import IpStatic200Response
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SettingsApi(api_client)
-    id = 'id_example' # str | 
-    status = 'status_example' # str | disable or enable
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.SettingsApi(api_client)
+    id = 'id_example'
+    status = 'status_example'
+    
     try:
-        # IP static
-        api_response = api_instance.ip_static(id, status)
-        print("The response of SettingsApi->ip_static:\n")
+        api_response: IpStatic200Response = api_instance.ip_static(id, status)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsApi->ip_static: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -186,44 +144,30 @@ update envs that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.update_envs import UpdateEnvs
-from openapi_client.models.update_envs200_response import UpdateEnvs200Response
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.update_envs import UpdateEnvs
+from paas.openapi_client.models.update_envs200_response import UpdateEnvs200Response
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SettingsApi(api_client)
-    update_envs = openapi_client.UpdateEnvs() # UpdateEnvs | 
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.SettingsApi(api_client)
+    update_envs: UpdateEnvs = paas.openapi_client.UpdateEnvs()
+    update_envs.project = 'project_example'
+    update_envs.variables = [
+        {
+            "key": "key_example",
+            "value": "value_example"
+        }
+    ]
+    
     try:
-        # Update envs
-        api_response = api_instance.update_envs(update_envs)
-        print("The response of SettingsApi->update_envs:\n")
+        api_response: UpdateEnvs200Response = api_instance.update_envs(update_envs)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsApi->update_envs: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -268,41 +212,20 @@ zero downtime that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SettingsApi(api_client)
-    id = 'id_example' # str | 
-    status = 'status_example' # str | disable or enable
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.SettingsApi(api_client)
+    id = 'id_example'
+    status = 'status_example'
+    
     try:
-        # Zero downtime
         api_instance.zero_downtime(id, status)
-    except Exception as e:
-        print("Exception when calling SettingsApi->zero_downtime: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

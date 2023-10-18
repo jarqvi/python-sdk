@@ -22,44 +22,23 @@ get cpu reports of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.reports import Reports
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.reports import Reports
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ReportsApi(api_client)
-    name = 'name_example' # str | The name of your app
-    since = 3.4 # float | The since of your cpu reports
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.ReportsApi(api_client)
+    name = 'name_example'
+    since = 3.4 
+    
     try:
-        # Get cpu reports of app
-        api_response = api_instance.get_app_cpu_reports(name, since)
-        print("The response of ReportsApi->get_app_cpu_reports:\n")
+        api_response: Reports = api_instance.get_app_cpu_reports(name, since)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ReportsApi->get_app_cpu_reports: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -105,44 +84,23 @@ get memory reports of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.reports import Reports
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.reports import Reports
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ReportsApi(api_client)
-    name = 'name_example' # str | The name of your app
-    since = 3.4 # float | The since of your memory reports
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.ReportsApi(api_client)
+    name = 'name_example'
+    since = 3.4 
+    
     try:
-        # Get memory reports of app
-        api_response = api_instance.get_app_memory_reports(name, since)
-        print("The response of ReportsApi->get_app_memory_reports:\n")
+        api_response: Reports = api_instance.get_app_memory_reports(name, since)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ReportsApi->get_app_memory_reports: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -188,44 +146,23 @@ get network-receive reports of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.reports import Reports
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.reports import Reports
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ReportsApi(api_client)
-    name = 'name_example' # str | The name of your app
-    since = 3.4 # float | The since of your network-receive reports
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.ReportsApi(api_client)
+    name = 'name_example'
+    since = 3.4 
+    
     try:
-        # Get network-receive reports of app
-        api_response = api_instance.get_app_network_receive_reports(name, since)
-        print("The response of ReportsApi->get_app_network_receive_reports:\n")
+        api_response: Reports = api_instance.get_app_network_receive_reports(name, since)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ReportsApi->get_app_network_receive_reports: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -271,43 +208,22 @@ get summary reports of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.get_app_summary_reports200_response import GetAppSummaryReports200Response
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.get_app_summary_reports200_response import GetAppSummaryReports200Response
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ReportsApi(api_client)
-    name = 'name_example' # str | The name of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.ReportsApi(api_client)
+    name = 'name_example'
+    
     try:
-        # Get summary reports of app
-        api_response = api_instance.get_app_summary_reports(name)
-        print("The response of ReportsApi->get_app_summary_reports:\n")
+        api_response: GetAppSummaryReports200Response = api_instance.get_app_summary_reports(name)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ReportsApi->get_app_summary_reports: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -352,44 +268,23 @@ get network-transmit reports of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.reports import Reports
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.reports import Reports
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ReportsApi(api_client)
-    name = 'name_example' # str | The name of your app
-    since = 3.4 # float | The since of your network-transmit reports
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.ReportsApi(api_client)
+    name = 'name_example' 
+    since = 3.4 
+    
     try:
-        # Get network-transmit reports of app
-        api_response = api_instance.get_network_transmit_reports(name, since)
-        print("The response of ReportsApi->get_network_transmit_reports:\n")
+        api_response: Reports = api_instance.get_network_transmit_reports(name, since)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ReportsApi->get_network_transmit_reports: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

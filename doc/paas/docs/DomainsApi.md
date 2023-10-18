@@ -25,43 +25,22 @@ check a domain that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.check_domain import CheckDomain
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.check_domain import CheckDomain
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    id = 'id_example' # str | The id of your domain
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    id = 'id_example'
+    
     try:
-        # Check a domain
-        api_response = api_instance.check_domain(id)
-        print("The response of DomainsApi->check_domain:\n")
+        api_response:CheckDomain = api_instance.check_domain(id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DomainsApi->check_domain: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -106,44 +85,26 @@ create a domain that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_app_domain201_response import CreateAppDomain201Response
-from openapi_client.models.create_app_domain_request import CreateAppDomainRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.create_app_domain201_response import CreateAppDomain201Response
+from paas.openapi_client.models.create_app_domain_request import CreateAppDomainRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    domain = openapi_client.CreateAppDomainRequest() # CreateAppDomainRequest | The domain of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    domain: CreateAppDomainRequest = paas.openapi_client.CreateAppDomainRequest()
+    domain.name = 'name_example'
+    domain.project = 'project_example'
+    domain.type = 'type_example'
+    
     try:
-        # Create a domain
-        api_response = api_instance.create_app_domain(domain)
-        print("The response of DomainsApi->create_app_domain:\n")
+        api_response:CreateAppDomain201Response = api_instance.create_app_domain(domain)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DomainsApi->create_app_domain: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -189,40 +150,19 @@ delete a domain that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    id = 'id_example' # str | The id of your domain
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    id = 'id_example'
+    
     try:
-        # Delete a domain
         api_instance.delete_domain(id)
-    except Exception as e:
-        print("Exception when calling DomainsApi->delete_domain: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -267,40 +207,19 @@ disable ssl that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    id = 'id_example' # str | The id of your domain
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    id = 'id_example'
+    
     try:
-        # Disable ssl
         api_instance.disable_ssl(id)
-    except Exception as e:
-        print("Exception when calling DomainsApi->disable_ssl: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -345,44 +264,24 @@ enable ssl that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.enable_ssl200_response import EnableSsl200Response
-from openapi_client.models.enable_ssl_request import EnableSslRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.enable_ssl200_response import EnableSsl200Response
+from paas.openapi_client.models.enable_ssl_request import EnableSslRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    domain = openapi_client.EnableSslRequest() # EnableSslRequest | The domain of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    domain: EnableSslRequest = paas.openapi_client.EnableSslRequest()
+    domain.domain = "example.com"
+    
     try:
-        # Enable ssl
-        api_response = api_instance.enable_ssl(domain)
-        print("The response of DomainsApi->enable_ssl:\n")
+        api_response: EnableSsl200Response = api_instance.enable_ssl(domain)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DomainsApi->enable_ssl: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -427,43 +326,22 @@ get all domains that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.domains import Domains
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.domains import Domains
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    project = 'project_example' # str | The name of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    project = 'project_example'
+    
     try:
-        # Get all domains
-        api_response = api_instance.get_app_domains(project)
-        print("The response of DomainsApi->get_app_domains:\n")
+        api_response: Domains = api_instance.get_app_domains(project)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DomainsApi->get_app_domains: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -508,42 +386,23 @@ redirect a domain that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.redirect_domain_request import RedirectDomainRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.redirect_domain_request import RedirectDomainRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    id = 'id_example' # str | The id of your domain
-    domain = openapi_client.RedirectDomainRequest() # RedirectDomainRequest | The domain of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    id = 'id_example'
+    domain: RedirectDomainRequest = paas.openapi_client.RedirectDomainRequest()
+    domain.redirect_status = 302 # 301 or 302
+    domain.redirect_to = 'example.com'
+    
     try:
-        # Redirect a domain
         api_instance.redirect_domain(id, domain)
-    except Exception as e:
-        print("Exception when calling DomainsApi->redirect_domain: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -589,41 +448,22 @@ set a domain for project that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.set_app_domain_request import SetAppDomainRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.set_app_domain_request import SetAppDomainRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DomainsApi(api_client)
-    domain = openapi_client.SetAppDomainRequest() # SetAppDomainRequest | The domain of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DomainsApi(api_client)
+    domain: SetAppDomainRequest = paas.openapi_client.SetAppDomainRequest()
+    domain.domain_id = 'example_domain_id'
+    domain.project_id = 'example_project_id'
+    
     try:
-        # Set a domain for project
         api_instance.set_app_domain(domain)
-    except Exception as e:
-        print("Exception when calling DomainsApi->set_app_domain: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

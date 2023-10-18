@@ -21,44 +21,23 @@ creates a new zone on dns server
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_zone import CreateZone
-from openapi_client.models.create_zone_request import CreateZoneRequest
-from openapi_client.rest import ApiException
+import dns.openapi_client
+from dns.openapi_client.models.create_zone import CreateZone
+from dns.openapi_client.models.create_zone_request import CreateZoneRequest
+from dns.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://dns-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://dns-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ZoneApi(api_client)
-    zone_struct = openapi_client.CreateZoneRequest() # CreateZoneRequest | The zone to create
-
+with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dns.openapi_client.ZoneApi(api_client)
+    zone_struct: CreateZoneRequest = dns.openapi_client.CreateZoneRequest(name = "example.com")
+    
     try:
-        # Create Zone
-        api_response = api_instance.create_zone(zone_struct)
-        print("The response of ZoneApi->create_zone:\n")
+        api_response: CreateZone = api_instance.create_zone(zone_struct)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ZoneApi->create_zone: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -104,43 +83,22 @@ Deletes this zone, all dns records
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.submitted import Submitted
-from openapi_client.rest import ApiException
+import dns.openapi_client
+from dns.openapi_client.models.submitted import Submitted
+from dns.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://dns-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://dns-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ZoneApi(api_client)
-    zone = 'zone_example' # str | The name of the zone to delete
-
+with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dns.openapi_client.ZoneApi(api_client)
+    zone = 'example.com'
+    
     try:
-        # Delete Zone
-        api_response = api_instance.delete_zone(zone)
-        print("The response of ZoneApi->delete_zone:\n")
+        api_response: Submitted = api_instance.delete_zone(zone)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ZoneApi->delete_zone: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -185,42 +143,20 @@ list all zones that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.zones import Zones
-from openapi_client.rest import ApiException
+import dns.openapi_client
+from dns.openapi_client.models.zones import Zones
+from dns.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://dns-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://dns-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ZoneApi(api_client)
-
+with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dns.openapi_client.ZoneApi(api_client)
     try:
-        # List all zones
-        api_response = api_instance.get_list_zones()
-        print("The response of ZoneApi->get_list_zones:\n")
+        api_response: Zones = api_instance.get_list_zones()
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ZoneApi->get_list_zones: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -259,43 +195,22 @@ Get this zone, all dns records
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_zone import CreateZone
-from openapi_client.rest import ApiException
+import dns.openapi_client
+from dns.openapi_client.models.create_zone import CreateZone
+from dns.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://dns-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://dns-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ZoneApi(api_client)
-    zone = 'zone_example' # str | The name of the zone
-
+with dns.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dns.openapi_client.ZoneApi(api_client)
+    zone = 'example.com'
+    
     try:
-        # Get Zone
-        api_response = api_instance.get_zone(zone)
-        print("The response of ZoneApi->get_zone:\n")
+        api_response: CreateZone = api_instance.get_zone(zone)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ZoneApi->get_zone: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

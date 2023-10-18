@@ -23,44 +23,26 @@ Create access and secret key
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_key import CreateKey
-from openapi_client.models.create_key201_response import CreateKey201Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.create_key import CreateKey
+from object_storage.openapi_client.models.create_key201_response import CreateKey201Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.KeyApi(api_client)
-    body = openapi_client.CreateKey() # CreateKey | Declare Buckets for access key
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.FolderApi(api_client)
+    body: CreateKey = object_storage.openapi_client.CreateKey(
+        buckets = 'buckets_example',
+        description = 'description_example'
+    )
+    
     try:
-        # Create Keys
-        api_response = api_instance.create_key(body)
-        print("The response of KeyApi->create_key:\n")
+        api_response: CreateKey201Response = api_instance.create_key(body)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling KeyApi->create_key: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -106,40 +88,19 @@ Delete access key
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.KeyApi(api_client)
-    key = 'key_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.FolderApi(api_client)
+    key = 'key_example'
+    
     try:
-        # Delete Key
         api_instance.delete_key(key)
-    except Exception as e:
-        print("Exception when calling KeyApi->delete_key: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -186,40 +147,19 @@ Get a key
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.KeyApi(api_client)
-    key = 'key_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.FolderApi(api_client)
+    key = 'key_example'
+    
     try:
-        # Get Key
         api_instance.get_key(key)
-    except Exception as e:
-        print("Exception when calling KeyApi->get_key: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -263,42 +203,21 @@ Get List of Keys
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.keys import Keys
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.keys import Keys
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.KeyApi(api_client)
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.FolderApi(api_client)
+    
     try:
-        # Get List of Keys
-        api_response = api_instance.get_list_keys()
-        print("The response of KeyApi->get_list_keys:\n")
+        api_response: Keys = api_instance.get_list_keys()
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling KeyApi->get_list_keys: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -341,43 +260,22 @@ Revoke secret key
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.revoke_secret_key200_response import RevokeSecretKey200Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.revoke_secret_key200_response import RevokeSecretKey200Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.KeyApi(api_client)
-    key = 'key_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.FolderApi(api_client)
+    key = 'key_example' 
+    
     try:
-        # Revoke secret key
-        api_response = api_instance.revoke_secret_key(key)
-        print("The response of KeyApi->revoke_secret_key:\n")
+        api_response: RevokeSecretKey200Response = api_instance.revoke_secret_key(key)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling KeyApi->revoke_secret_key: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -424,45 +322,29 @@ Update buckets of key ( redefine )
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_bucket201_response import CreateBucket201Response
-from openapi_client.models.create_key import CreateKey
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.create_bucket201_response import CreateBucket201Response
+from object_storage.openapi_client.models.create_key import CreateKey
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.KeyApi(api_client)
-    key = 'key_example' # str | 
-    body = openapi_client.CreateKey() # CreateKey | Declare Buckets for access key
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.FolderApi(api_client)
+    key = 'key_example' 
+    body: CreateKey = object_storage.openapi_client.CreateKey(
+        buckets = [
+            {}
+        ],
+        description = 'description_example'
+    )
+    
     try:
-        # Update key
-        api_response = api_instance.update_key(key, body)
-        print("The response of KeyApi->update_key:\n")
+        api_response: CreateBucket201Response = api_instance.update_key(key, body)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling KeyApi->update_key: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

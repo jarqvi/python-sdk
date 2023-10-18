@@ -1725,7 +1725,7 @@ sdks:
                     pprint(api_response)
                 except ApiException as e:
                     print(e)
-  object-storage:
+  object_storage:
     readme: |
         import object_storage.openapi_client
         from object_storage.openapi_client.models.list_bucket import ListBucket

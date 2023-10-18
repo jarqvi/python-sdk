@@ -25,44 +25,23 @@ change control-panel status that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.change_control_panel200_response import ChangeControlPanel200Response
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.models.change_control_panel200_response import ChangeControlPanel200Response
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-    id = 'id_example' # str | 
-    status = 'status_example' # str | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    id = 'id_example'
+    status = 'status_example'
+    
     try:
-        # Change control-panel status
-        api_response = api_instance.change_control_panel(id, status)
-        print("The response of DatabasesApi->change_control_panel:\n")
+        api_response: ChangeControlPanel200Response = api_instance.change_control_panel(id, status)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->change_control_panel: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -109,41 +88,20 @@ change public network status that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-    id = 'id_example' # str | 
-    status = 'status_example' # str | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    id = 'id_example'
+    status = 'status_example'
+    
     try:
-        # Change public network status
         api_instance.change_public_network(id, status)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->change_public_network: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -190,44 +148,32 @@ create a database that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_database200_response import CreateDatabase200Response
-from openapi_client.models.create_databases import CreateDatabases
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.models.create_database200_response import CreateDatabase200Response
+from dbaas.openapi_client.models.create_databases import CreateDatabases
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-    create_a_databases = openapi_client.CreateDatabases() # CreateDatabases | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    create_a_databases: CreateDatabases = dbaas.openapi_client.CreateDatabases(
+        hostname = 'hostname_example',
+        options = {
+            "standaloneReplicaSet": True,
+        },
+        publicNetwork = True,
+        type = 'type_example',
+        planID = 'planID_example',
+        version = 'version_example'
+    )
+    
     try:
-        # Create a database
-        api_response = api_instance.create_database(create_a_databases)
-        print("The response of DatabasesApi->create_database:\n")
+        api_response: CreateDatabase200Response = api_instance.create_database(create_a_databases)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->create_database: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -272,40 +218,19 @@ delete a database that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-    id = 'id_example' # str | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    id = 'id_example'
+    
     try:
-        # Delete a database
         api_instance.delete_database(id)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->delete_database: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -350,43 +275,22 @@ get a database that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.db_details import DBDetails
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.models.db_details import DBDetails
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-    id = 'id_example' # str | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    id = 'id_example'
+    
     try:
-        # Get a database
-        api_response = api_instance.get_database(id)
-        print("The response of DatabasesApi->get_database:\n")
+        api_response: DBDetails = api_instance.get_database(id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->get_database: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -431,42 +335,21 @@ get all databases that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.dbs_details import DBsDetails
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.rest import ApiException
+from dbaas.openapi_client.models.dbs_details import DBsDetails
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    
     try:
-        # Get all databases
-        api_response = api_instance.get_list_databases()
-        print("The response of DatabasesApi->get_list_databases:\n")
+        api_response: DBsDetails = api_instance.get_list_databases()
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->get_list_databases: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -507,42 +390,24 @@ resize a database that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.resize_database_request import ResizeDatabaseRequest
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.models.resize_database_request import ResizeDatabaseRequest
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-    id = 'id_example' # str | 
-    resize = openapi_client.ResizeDatabaseRequest() # ResizeDatabaseRequest | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    id = 'id_example' 
+    resize: ResizeDatabaseRequest = dbaas.openapi_client.ResizeDatabaseRequest(
+        disk = True,
+        planID = "planID_example",
+    )
+    
     try:
-        # Resize a database
         api_instance.resize_database(id, resize)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->resize_database: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -588,42 +453,23 @@ power on or power off a database that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.turn_database_request import TurnDatabaseRequest
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.models.turn_database_request import TurnDatabaseRequest
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DatabasesApi(api_client)
-    id = 'id_example' # str | 
-    scale = openapi_client.TurnDatabaseRequest() # TurnDatabaseRequest | 1 for power on or 0 for power off
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    id = 'id_example'
+    scale: TurnDatabaseRequest = dbaas.openapi_client.TurnDatabaseRequest(
+        scale = 1
+    )
+    
     try:
-        # Power on or power off a database
         api_instance.turn_database(id, scale)
-    except Exception as e:
-        print("Exception when calling DatabasesApi->turn_database: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

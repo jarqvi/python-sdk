@@ -25,45 +25,24 @@ change mail server plan
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.model10 import Model10
-from openapi_client.models.post_mails201_response import PostMails201Response
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.model10 import Model10
+from mail.openapi_client.models.post_mails201_response import PostMails201Response
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-    body = openapi_client.Model10() # Model10 |  (optional)
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    body: Model10 = mail.openapi_client.Model10(plan = 'plan_example')
+    
     try:
-        # change mail server plan
         api_response = api_instance.change_mail_server_plan(mail_server_id, body=body)
-        print("The response of MailsApi->change_mail_server_plan:\n")
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->change_mail_server_plan: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -107,43 +86,22 @@ check if domain name is available
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.post_mails201_response import PostMails201Response
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.post_mails201_response import PostMails201Response
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    domain = 'domain_example' # str | 
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    domain = 'domain_example'
+    
     try:
-        # check if domain name is available
-        api_response = api_instance.check_domain_available(domain)
-        print("The response of MailsApi->check_domain_available:\n")
+        api_response: PostMails201Response = api_instance.check_domain_available(domain)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->check_domain_available: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -185,43 +143,22 @@ mail server check dns status
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.check_dns import CheckDNS
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.check_dns import CheckDNS
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    
     try:
-        # mail server check dns status
-        api_response = api_instance.check_mail_server_dns_status(mail_server_id)
-        print("The response of MailsApi->check_mail_server_dns_status:\n")
+        api_response: CheckDNS = api_instance.check_mail_server_dns_status(mail_server_id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->check_mail_server_dns_status: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -263,40 +200,19 @@ delete mail server
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    
     try:
-        # delete mail server
         api_instance.delete_mail_server(mail_server_id)
-    except Exception as e:
-        print("Exception when calling MailsApi->delete_mail_server: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -339,45 +255,24 @@ edit mail server
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.model8 import Model8
-from openapi_client.models.post_mails201_response import PostMails201Response
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.mode`ls.model8 import Model8
+from mail.openapi_client.models.post_mails201_response import PostMails201Response
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-    body = openapi_client.Model8() # Model8 |  (optional)
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    body: Model8 = mail.openapi_client.Model8(mode = 'dev', inboundSpamThreshold = 0)
+    
     try:
-        # edit mail server
-        api_response = api_instance.edit_mail_server(mail_server_id, body=body)
-        print("The response of MailsApi->edit_mail_server:\n")
+        api_response: PostMails201Response = api_instance.edit_mail_server(mail_server_id, body=body)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->edit_mail_server: %s\n" % e)
+    except ApiException as e:
+        print(e)`
+
 ```
 
 
@@ -421,43 +316,22 @@ count number of free mails every month
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.remaining_free_mails import RemainingFreeMails
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.remaining_free_mails import RemainingFreeMails
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    
     try:
-        # count number of free mails every month
-        api_response = api_instance.get_count_free_mails(mail_server_id)
-        print("The response of MailsApi->get_count_free_mails:\n")
+        api_response: RemainingFreeMails = api_instance.get_count_free_mails(mail_server_id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->get_count_free_mails: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -500,44 +374,23 @@ count number of sent mails every day
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.count_mail_per_day import CountMailPerDay
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.count_mail_per_day import CountMailPerDay
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-    last_n_days = 30 # float |  (optional) (default to 30)
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    mail_server_id = 'mail_server_id_example' 
+    last_n_days = 30 
+    
     try:
-        # count number of sent mails every day
-        api_response = api_instance.get_count_mails(mail_server_id, last_n_days=last_n_days)
-        print("The response of MailsApi->get_count_mails:\n")
+        api_response: CountMailPerDay = api_instance.get_count_mails(mail_server_id, last_n_days=last_n_days)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->get_count_mails: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -581,42 +434,21 @@ get all mail servers
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.mail_servers import MailServers
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.mail_servers import MailServers
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
 
     try:
-        # get all mail servers
-        api_response = api_instance.get_mails()
-        print("The response of MailsApi->get_mails:\n")
+        api_response: MailServers = api_instance.get_mails()
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->get_mails: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -654,43 +486,22 @@ get single mail server
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.mail_server import MailServer
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.mail_server import MailServer
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    
     try:
-        # get single mail server
-        api_response = api_instance.get_single_mail_server(mail_server_id)
-        print("The response of MailsApi->get_single_mail_server:\n")
+        api_response: MailServer = api_instance.get_single_mail_server(mail_server_id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->get_single_mail_server: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -733,44 +544,23 @@ create mail server
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.model1 import Model1
-from openapi_client.models.post_mails201_response import PostMails201Response
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.model1 import Model1
+from mail.openapi_client.models.post_mails201_response import PostMails201Response
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.MailsApi(api_client)
-    body = openapi_client.Model1() # Model1 |  (optional)
-
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.MailsApi(api_client)
+    body: Model1 = mail.openapi_client.Model1(plan = 'plan_example', domain = 'domain_example', mode = 'DEV')
+    
     try:
-        # create mail server
-        api_response = api_instance.post_mails(body=body)
-        print("The response of MailsApi->post_mails:\n")
+        api_response: PostMails201Response = api_instance.post_mails(body=body)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MailsApi->post_mails: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

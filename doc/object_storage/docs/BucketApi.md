@@ -27,44 +27,23 @@ Change Bucket Access policy on an object storage ( public / private )
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.change_bucket_access200_response import ChangeBucketAccess200Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.change_bucket_access200_response import ChangeBucketAccess200Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-    bucket = 'bucket_example' # str | 
-    permission = 'permission_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)    
+    bucket = 'bucket_example'
+    permission = 'permission_example'
+    
     try:
-        # change Bucket Access Policy
-        api_response = api_instance.change_bucket_access(bucket, permission)
-        print("The response of BucketApi->change_bucket_access:\n")
+        api_response: ChangeBucketAccess200Response = api_instance.change_bucket_access(bucket, permission)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BucketApi->change_bucket_access: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -111,43 +90,22 @@ Check if you can create Bucket with specified Name.
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_bucket201_response import CreateBucket201Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.create_bucket201_response import CreateBucket201Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-    bucket = 'bucket_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)    
+    bucket = 'bucket_example'
+    
     try:
-        # Check Bucket availability
-        api_response = api_instance.check_bucket(bucket)
-        print("The response of BucketApi->check_bucket:\n")
+        api_response: CreateBucket201Response = api_instance.check_bucket(bucket)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BucketApi->check_bucket: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -194,44 +152,27 @@ creates a new bucket on an object storage
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_bucket import CreateBucket
-from openapi_client.models.create_bucket201_response import CreateBucket201Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.create_bucket import CreateBucket
+from object_storage.openapi_client.models.create_bucket201_response import CreateBucket201Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-    body = openapi_client.CreateBucket() # CreateBucket | create bucket. Acceptable values for permission: ( private / public ) and for plan: ( 20g, 40g, 80g, 160g )
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client) 
+    body: CreateBucket = object_storage.openapi_client.CreateBucket(
+        name = 'name_example',
+        plan = 'plan_example',
+        permission = 'permission_example',
+    )
+    
     try:
-        # Create Bucket
-        api_response = api_instance.create_bucket(body)
-        print("The response of BucketApi->create_bucket:\n")
+        api_response: CreateBucket201Response = api_instance.create_bucket(body)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BucketApi->create_bucket: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -277,40 +218,19 @@ Delete Bucket on an object storage
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-    bucket = 'bucket_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)
+    bucket = 'bucket_example'
+    
     try:
-        # Destroy Bucket
         api_instance.destroy_bucket(bucket)
-    except Exception as e:
-        print("Exception when calling BucketApi->destroy_bucket: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -356,42 +276,21 @@ List all Bucket
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.list_bucket import ListBucket
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.list_bucket import ListBucket
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)
+    
     try:
-        # List all Buckets
-        api_response = api_instance.get_buckets()
-        print("The response of BucketApi->get_buckets:\n")
+        api_response: ListBucket = api_instance.get_buckets()
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BucketApi->get_buckets: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -432,39 +331,18 @@ List previous buckets of storage service in liara.
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)
+    
     try:
-        # List storage service buckets
         api_instance.get_list_previous_buckets()
-    except Exception as e:
-        print("Exception when calling BucketApi->get_list_previous_buckets: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -507,42 +385,21 @@ list migration operation
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.get_migrations200_response import GetMigrations200Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.get_migrations200_response import GetMigrations200Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)
+    
     try:
-        # list migration operation
-        api_response = api_instance.get_migrations()
-        print("The response of BucketApi->get_migrations:\n")
+        api_response: GetMigrations200Response = api_instance.get_migrations()
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BucketApi->get_migrations: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -583,43 +440,22 @@ Get Single Buckets
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.get_single_buckets200_response import GetSingleBuckets200Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.get_single_buckets200_response import GetSingleBuckets200Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-    bucket = 'bucket_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)
+    bucket = 'bucket_example'
+    
     try:
-        # Get Single Buckets
-        api_response = api_instance.get_single_buckets(bucket)
-        print("The response of BucketApi->get_single_buckets:\n")
+        api_response: GetSingleBuckets200Response = api_instance.get_single_buckets(bucket)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BucketApi->get_single_buckets: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -663,41 +499,24 @@ Move data from one bucket to another
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.migrate_bucket import MigrateBucket
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.migrate_bucket import MigrateBucket
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-    body = openapi_client.MigrateBucket() # MigrateBucket | Migrate buckets
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)
+    body: MigrateBucket = object_storage.openapi_client.MigrateBucket(
+        var_from = 'var_from_example',
+        to = 'to_example',
+        path = 'path_example'
+    )
+    
     try:
-        # Migrating buckets
         api_instance.migrating_buckets(body)
-    except Exception as e:
-        print("Exception when calling BucketApi->migrating_buckets: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -743,44 +562,23 @@ Upgrade Bucket plan ( just make space bigger )
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.upgrade_bucket200_response import UpgradeBucket200Response
-from openapi_client.rest import ApiException
+import object_storage.openapi_client
+from object_storage.openapi_client.models.upgrade_bucket200_response import UpgradeBucket200Response
+from object_storage.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://storage-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://storage-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BucketApi(api_client)
-    bucket = 'bucket_example' # str | 
-    plan = 'plan_example' # str | 
-
+with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = object_storage.openapi_client.BucketApi(api_client)
+    bucket = 'bucket_example'
+    plan = 'plan_example'
+    
     try:
-        # Upgrade Bucket
-        api_response = api_instance.upgrade_bucket(bucket, plan)
-        print("The response of BucketApi->upgrade_bucket:\n")
+        api_response: UpgradeBucket200Response = api_instance.upgrade_bucket(bucket, plan)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BucketApi->upgrade_bucket: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

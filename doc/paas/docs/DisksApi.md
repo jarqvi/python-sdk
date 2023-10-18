@@ -27,41 +27,20 @@ create backup disk that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    id = 'id_example' # str | The id of your app
-    name = 'name_example' # str | The name of your disk
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    id = 'id_example'
+    name = 'name_example'
 
     try:
-        # Create backup disk
         api_instance.create_backup(id, name)
-    except Exception as e:
-        print("Exception when calling DisksApi->create_backup: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -107,42 +86,23 @@ create a disk that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_disk_request import CreateDiskRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.create_disk_request import CreateDiskRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    name = 'name_example' # str | The name of your app
-    disk = openapi_client.CreateDiskRequest() # CreateDiskRequest | The disk of your app
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    name = 'name_example'
+    disk: CreateDiskRequest = paas.openapi_client.CreateDiskRequest()
+    disk.name = 'name_example' 
+    disk.size = 'size_example' 
 
     try:
-        # Create a disk
         api_instance.create_disk(name, disk)
-    except Exception as e:
-        print("Exception when calling DisksApi->create_disk: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -188,46 +148,27 @@ create ftp that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_ftp200_response import CreateFtp200Response
-from openapi_client.models.create_ftp_request import CreateFtpRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.create_ftp200_response import CreateFtp200Response
+from paas.openapi_client.models.create_ftp_request import CreateFtpRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    name = 'name_example' # str | The name of your app
-    dname = 'dname_example' # str | The name of your disk
-    create_ftp = openapi_client.CreateFtpRequest() # CreateFtpRequest | The plan of your app
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    name = 'name_example' 
+    dname = 'dname_example'
+    create_ftp: CreateFtpRequest = paas.openapi_client.CreateFtpRequest()
+    create_ftp.username = 'username_example'
+    create_ftp.read_only = True
 
     try:
-        # Create ftp
-        api_response = api_instance.create_ftp(name, dname, create_ftp)
-        print("The response of DisksApi->create_ftp:\n")
+        api_response: CreateFtp200Response = api_instance.create_ftp(name, dname, create_ftp)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DisksApi->create_ftp: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -274,41 +215,20 @@ delete a disk that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    id = 'id_example' # str | The id of your app
-    name = 'name_example' # str | The name of your disk of app
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    id = 'id_example'
+    name = 'name_example' 
 
     try:
-        # Delete a disk
         api_instance.delete_disk(id, name)
-    except Exception as e:
-        print("Exception when calling DisksApi->delete_disk: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -355,40 +275,19 @@ delete a ftp that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    fname = 'fname_example' # str | The name of your ftp
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    fname = 'fname_example'
 
     try:
-        # Delete a ftp
         api_instance.delete_ftp(fname)
-    except Exception as e:
-        print("Exception when calling DisksApi->delete_ftp: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -434,45 +333,24 @@ download backup disk that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.download_backup200_response import DownloadBackup200Response
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.download_backup200_response import DownloadBackup200Response
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    id = 'id_example' # str | The id of your app
-    dname = 'dname_example' # str | The name of your disk
-    bname = 'bname_example' # str | The name of your backup
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    id = 'id_example'
+    dname = 'dname_example'
+    bname = 'bname_example'
 
     try:
-        # Download backup disk
-        api_response = api_instance.download_backup(id, dname, bname)
-        print("The response of DisksApi->download_backup:\n")
+        api_response: DownloadBackup200Response = api_instance.download_backup(id, dname, bname)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DisksApi->download_backup: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -519,44 +397,23 @@ get backups disk that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.get_disk_backup import GetDiskBackup
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.get_disk_backup import GetDiskBackup
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    id = 'id_example' # str | The id of your app
-    name = 'name_example' # str | The name of your disk
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    id = 'id_example'
+    name = 'name_example'
 
     try:
-        # Get backups disk
-        api_response = api_instance.get_backups(id, name)
-        print("The response of DisksApi->get_backups:\n")
+        api_response: GetDiskBackup = api_instance.get_backups(id, name)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DisksApi->get_backups: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -602,43 +459,22 @@ get disks that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.get_disks import GetDisks
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.get_disks import GetDisks
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    id = 'id_example' # str | The id of your app
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    id = 'id_example'
 
     try:
-        # Get disks
-        api_response = api_instance.get_disks(id)
-        print("The response of DisksApi->get_disks:\n")
+        api_response: GetDisks = api_instance.get_disks(id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DisksApi->get_disks: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -683,44 +519,23 @@ get ftps that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.get_ftps200_response import GetFtps200Response
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.get_ftps200_response import GetFtps200Response
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    name = 'name_example' # str | The name of your app
-    dname = 'dname_example' # str | The name of your disk
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    name = 'name_example'
+    dname = 'dname_example'
 
     try:
-        # Get ftps
-        api_response = api_instance.get_ftps(name, dname)
-        print("The response of DisksApi->get_ftps:\n")
+        api_response: GetFtps200Response = api_instance.get_ftps(name, dname)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DisksApi->get_ftps: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -766,43 +581,23 @@ resize disk that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.resize_disk_request import ResizeDiskRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.resize_disk_request import ResizeDiskRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.DisksApi(api_client)
-    name = 'name_example' # str | The name of your app
-    dname = 'dname_example' # str | The name of your disk
-    resize_disk = openapi_client.ResizeDiskRequest() # ResizeDiskRequest | The size of your disk
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.DisksApi(api_client)
+    name = 'name_example'
+    dname = 'dname_example'
+    resize_disk: ResizeDiskRequest = paas.openapi_client.ResizeDiskRequest()
+    resize_disk.size = 'size_example'
+    
     try:
-        # Resize disk
         api_instance.resize_disk(name, dname, resize_disk)
-    except Exception as e:
-        print("Exception when calling DisksApi->resize_disk: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

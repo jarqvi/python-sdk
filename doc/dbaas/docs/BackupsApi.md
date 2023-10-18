@@ -20,40 +20,19 @@ backup a database that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BackupsApi(api_client)
-    id = 'id_example' # str | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.BackupsApi(api_client)
+    id = 'id_example' 
+    
     try:
-        # Backup a database
         api_instance.create_backup(id)
-    except Exception as e:
-        print("Exception when calling BackupsApi->create_backup: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -98,44 +77,23 @@ download a backup that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.download_backup200_response import DownloadBackup200Response
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.models.download_backup200_response import DownloadBackup200Response
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BackupsApi(api_client)
-    id = 'id_example' # str | The id of your database
-    name = 'name_example' # str | The name of your backup
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.BackupsApi(api_client)
+    id = 'id_example'
+    name = 'name_example'
+    
     try:
-        # Download a backup
-        api_response = api_instance.download_backup(id, name)
-        print("The response of BackupsApi->download_backup:\n")
+        api_response: DownloadBackup200Response = api_instance.download_backup(id, name)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BackupsApi->download_backup: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -181,43 +139,22 @@ get all backups that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.get_list_backups200_response import GetListBackups200Response
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.models.get_list_backups200_response import GetListBackups200Response
+from dbaas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BackupsApi(api_client)
-    id = 'id_example' # str | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.BackupsApi(api_client)
+    id = 'id_example'
+    
     try:
-        # Get all backups
-        api_response = api_instance.get_list_backups(id)
-        print("The response of BackupsApi->get_list_backups:\n")
+        api_response: GetListBackups200Response = api_instance.get_list_backups(id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling BackupsApi->get_list_backups: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

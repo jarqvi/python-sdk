@@ -49,41 +49,20 @@ Execute `pytest` to run the tests.
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```python
-
-import time
-import openapi_client
-from openapi_client.rest import ApiException
+import dbaas.openapi_client
+from dbaas.openapi_client.rest import ApiException
+from dbaas.openapi_client.models.dbs_details import DBsDetails
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.BackupsApi(api_client)
-    id = 'id_example' # str | 
-
+with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+    
     try:
-        # Backup a database
-        api_instance.create_backup(id)
+        api_response: DBsDetails = api_instance.get_list_databases()
+        
+        pprint(api_response)
     except ApiException as e:
-        print("Exception when calling BackupsApi->create_backup: %s\n" % e)
+        print(e)
 
 ```
 

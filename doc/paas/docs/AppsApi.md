@@ -27,42 +27,21 @@ create app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.change_plan_request import ChangePlanRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.change_plan_request import ChangePlanRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of your app
-    plan = openapi_client.ChangePlanRequest() # ChangePlanRequest | The plan of your app
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example'
+    plan: ChangePlanRequest = paas.openapi_client.ChangePlanRequest(plan_id = 'plan_id_example')
 
     try:
-        # Change plan
         api_instance.change_plan(name, plan)
-    except Exception as e:
-        print("Exception when calling AppsApi->change_plan: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -108,41 +87,20 @@ create app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_app import CreateApp
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.create_app import CreateApp
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    create_app = openapi_client.CreateApp() # CreateApp | 
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    create_app: CreateApp = paas.openapi_client.CreateApp(name = 'name_example', plan_id= 'plan_id_example', platform = 'platform_example')
 
     try:
-        # Create a app
         api_instance.create_app(create_app)
-    except Exception as e:
-        print("Exception when calling AppsApi->create_app: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -187,40 +145,19 @@ delete app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of the app to delete
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example' 
+    
     try:
-        # Delete a app
         api_instance.delete_app_by_name(name)
-    except Exception as e:
-        print("Exception when calling AppsApi->delete_app_by_name: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -265,43 +202,22 @@ get applets of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.applets import Applets
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.applets import Applets
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example'
+    
     try:
-        # Get applets of app
-        api_response = api_instance.get_app_applets(name)
-        print("The response of AppsApi->get_app_applets:\n")
+        api_response: Applets = api_instance.get_app_applets(name)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->get_app_applets: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -346,43 +262,22 @@ get all details of all project that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.project_all_details import ProjectAllDetails
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.project_all_details import ProjectAllDetails
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of your app
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example'
+    
     try:
-        # Get details of a project
-        api_response = api_instance.get_app_by_name(name)
-        print("The response of AppsApi->get_app_by_name:\n")
+        api_response: ProjectAllDetails = api_instance.get_app_by_name(name)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->get_app_by_name: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -426,44 +321,23 @@ get logs of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.logs_inner import LogsInner
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.logs_inner import LogsInner
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of your app
-    since = 'since_example' # str | Show logs since timestamp
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example'
+    since = 'since_example'
+    
     try:
-        # Get logs of app
-        api_response = api_instance.get_app_logs(name, since)
-        print("The response of AppsApi->get_app_logs:\n")
+        api_response: LogsInner = api_instance.get_app_logs(name, since)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->get_app_logs: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -509,45 +383,24 @@ get releases of app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.releases import Releases
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.releases import Releases
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of your app
-    page = 1.0 # float | The page of your releases (default to 1.0)
-    count = 10.0 # float | The count of your releases (default to 10.0)
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example'
+    page = 1.0
+    count = 10.0 
+    
     try:
-        # Get releases of app
-        api_response = api_instance.get_app_releases(name, page, count)
-        print("The response of AppsApi->get_app_releases:\n")
+        api_response: Releases = api_instance.get_app_releases(name, page, count)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->get_app_releases: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -594,42 +447,20 @@ get all details of all projects that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.projects import Projects
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.projects import Projects
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
     try:
-        # Get details of all projects
-        api_response = api_instance.get_apps()
-        print("The response of AppsApi->get_apps:\n")
+        api_response: Projects = api_instance.get_apps()
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->get_apps: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -670,40 +501,19 @@ to restart app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of the app to restart
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example'
+    
     try:
-        # To restart a app
         api_instance.restart_app(name)
-    except Exception as e:
-        print("Exception when calling AppsApi->restart_app: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -747,42 +557,21 @@ turn on or off a app that user owns
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.turn_app_request import TurnAppRequest
-from openapi_client.rest import ApiException
+import paas.openapi_client
+from paas.openapi_client.models.turn_app_request import TurnAppRequest
+from paas.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://api.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.AppsApi(api_client)
-    name = 'name_example' # str | The name of the app to turn on or off
-    scale = openapi_client.TurnAppRequest() # TurnAppRequest | Return 1 to turn on or 0 to turn off
-
+with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = paas.openapi_client.AppsApi(api_client)
+    name = 'name_example'
+    scale: TurnAppRequest = paas.openapi_client.TurnAppRequest()
+    
     try:
-        # Turn on or off a app
         api_instance.turn_app(name, scale)
-    except Exception as e:
-        print("Exception when calling AppsApi->turn_app: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 

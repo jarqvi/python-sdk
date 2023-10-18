@@ -19,41 +19,20 @@ delete smtp credential
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SmtpApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-    username = 'username_example' # str | 
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.SmtpApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    username = 'username_example'
 
     try:
-        # delete smtp credential
         api_instance.delete_smtp_credential(mail_server_id, username)
-    except Exception as e:
-        print("Exception when calling SmtpApi->delete_smtp_credential: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -97,45 +76,24 @@ generate credentials to connet mail server with SMTP
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_smtp import CreateSMTP
-from openapi_client.models.model4 import Model4
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.create_smtp import CreateSMTP
+from mail.openapi_client.models.model4 import Model4
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SmtpApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-    body = openapi_client.Model4() # Model4 |  (optional)
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.SmtpApi(api_client)
+    mail_server_id = 'mail_server_id_example'
+    body: Model4 = mail.openapi_client.Model4(description = "description_example")
 
     try:
-        # generate credentials to connet mail server with SMTP
-        api_response = api_instance.generate_credentials(mail_server_id, body=body)
-        print("The response of SmtpApi->generate_credentials:\n")
+        api_response: CreateSMTP = api_instance.generate_credentials(mail_server_id, body=body)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SmtpApi->generate_credentials: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -180,43 +138,22 @@ get credential to connect to mail server with SMTP
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.smtp import SMTP
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.smtp import SMTP
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SmtpApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.SmtpApi(api_client)
+    mail_server_id = 'mail_server_id_example'
 
     try:
-        # get credential to connect to mail server with SMTP
-        api_response = api_instance.get_credential(mail_server_id)
-        print("The response of SmtpApi->get_credential:\n")
+        api_response: SMTP = api_instance.get_credential(mail_server_id)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SmtpApi->get_credential: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
@@ -259,45 +196,24 @@ revoke credentials to connect mail server with SMTP
 
 * Api Key Authentication (jwt):
 ```python
-import time
-import os
-import openapi_client
-from openapi_client.models.create_smtp import CreateSMTP
-from openapi_client.models.model9 import Model9
-from openapi_client.rest import ApiException
+import mail.openapi_client
+from mail.openapi_client.models.create_smtp import CreateSMTP
+from mail.openapi_client.models.model9 import Model9
+from mail.openapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://mail-service.iran.liara.ir
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://mail-service.iran.liara.ir"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: jwt
-configuration.api_key['jwt'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['jwt'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.SmtpApi(api_client)
-    mail_server_id = 'mail_server_id_example' # str | 
-    body = openapi_client.Model9() # Model9 |  (optional)
+with mail.create_sdk("YOUR-API-TOKEN") as api_client:
+    api_instance = mail.openapi_client.SmtpApi(api_client)
+    mail_server_id = 'mail_server_id_example' 
+    body: Model9 = mail.openapi_client.Model9(username = 'username_example')
 
     try:
-        # revoke credentials to connect mail server with SMTP
-        api_response = api_instance.revoke_credentials(mail_server_id, body=body)
-        print("The response of SmtpApi->revoke_credentials:\n")
+        api_response: CreateSMTP = api_instance.revoke_credentials(mail_server_id, body=body)
+        
         pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SmtpApi->revoke_credentials: %s\n" % e)
+    except ApiException as e:
+        print(e)
+
 ```
 
 
