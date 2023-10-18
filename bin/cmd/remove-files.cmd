@@ -11,7 +11,7 @@ if exist %1 (
 goto :eof
 
 REM Directory paths where files should be deleted
-set "directories=.\object-storage .\dbaas .\paas .\mail .\dns"
+set "directories=.\object_storage .\dbaas .\paas .\mail .\dns"
 
 REM Files to delete in each directory
 set "files_to_delete=setup.py .github .gitignore .gitlab-ci.yml git_push.sh .travis.yml pyproject.toml requirements.txt setup.cfg test-requirements.txt tox.ini"

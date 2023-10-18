@@ -12,7 +12,7 @@ delete_file_if_exists() {
 
 # Directory paths where files should be deleted
 directories=(
-    ./object-storage
+    ./object_storage
     ./dbaas
     ./paas
     ./mail

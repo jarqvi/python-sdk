@@ -1,7 +1,7 @@
 @echo off
 
 REM Directory paths where files should be moved
-set "directories=object-storage dbaas paas mail dns"
+set "directories=object_storage dbaas paas mail dns"
 
 REM Loop through directories and move specified files
 for %%d in (%directories%) do (

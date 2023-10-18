@@ -2,7 +2,7 @@
 
 # Directory paths where files should be moved
 directories=(
-    object-storage
+    object_storage
     dbaas
     paas
     mail
