@@ -111,7 +111,7 @@ sdks:
                 api_instance = dns.openapi_client.DnsRecordApi(api_client)
                 zone = 'example.com'
                 dns_record: DnsRecord = dns.openapi_client.DnsRecord(
-                    name = "tesst", type = "A", ttl = 3600, contents = [{
+                    name = "test", type = "A", ttl = 3600, contents = [{
                         "ip": "1.2.3.4"
                     }]
                 )
@@ -791,13 +791,115 @@ sdks:
     classes:
       AppsApi:
         examples:
-          changePlan:
-          createApp:
-          deleteAppByName:
-          getAppApplets:
-          getAppByName:
-          getAppLogs:
-          getAppReleases:
+          change_plan: |
+            import paas.openapi_client
+            from paas.openapi_client.models.change_plan_request import ChangePlanRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example'
+                plan: ChangePlanRequest = paas.openapi_client.ChangePlanRequest(plan_id = 'plan_id_example')
+
+                try:
+                    api_instance.change_plan(name, plan)
+                except ApiException as e:
+                    print(e)
+          create_app: |
+            import paas.openapi_client
+            from paas.openapi_client.models.create_app import CreateApp
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                create_app: CreateApp = paas.openapi_client.CreateApp(name = 'name_example', plan_id= 'plan_id_example', platform = 'platform_example')
+
+                try:
+                    api_instance.create_app(create_app)
+                except ApiException as e:
+                    print(e)
+          delete_app_by_name: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example' 
+                
+                try:
+                    api_instance.delete_app_by_name(name)
+                except ApiException as e:
+                    print(e)
+          get_app_applets: |
+            import paas.openapi_client
+            from paas.openapi_client.models.applets import Applets
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example'
+                
+                try:
+                    api_response: Applets = api_instance.get_app_applets(name)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_app_by_name: |
+            import paas.openapi_client
+            from paas.openapi_client.models.project_all_details import ProjectAllDetails
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example'
+                
+                try:
+                    api_response: ProjectAllDetails = api_instance.get_app_by_name(name)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_app_logs: |
+            import paas.openapi_client
+            from paas.openapi_client.models.logs_inner import LogsInner
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example'
+                since = 'since_example'
+                
+                try:
+                    api_response: LogsInner = api_instance.get_app_logs(name, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_app_releases: |
+            import paas.openapi_client
+            from paas.openapi_client.models.releases import Releases
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example'
+                page = 1.0
+                count = 10.0 
+                
+                try:
+                    api_response: Releases = api_instance.get_app_releases(name, page, count)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
           get_apps: |
             import paas.openapi_client
             from paas.openapi_client.models.projects import Projects
@@ -812,47 +914,528 @@ sdks:
                     pprint(api_response)
                 except ApiException as e:
                     print(e)
-          restartApp:
-          turnApp:
+          restart_app: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example'
+                
+                try:
+                    api_instance.restart_app(name)
+                except ApiException as e:
+                    print(e)
+          turn_app: |
+            import paas.openapi_client
+            from paas.openapi_client.models.turn_app_request import TurnAppRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.AppsApi(api_client)
+                name = 'name_example'
+                scale: TurnAppRequest = paas.openapi_client.TurnAppRequest()
+                
+                try:
+                    api_instance.turn_app(name, scale)
+                except ApiException as e:
+                    print(e)
       DeployApi:
         examples:
-          releasesDeploy:
-          sourcesDeploy:
+          releasesDeploy: |
+            import paas.openapi_client
+            from paas.openapi_client.models.deploy_releases import DeployReleases
+            from paas.openapi_client.models.releases_deploy200_response import ReleasesDeploy200Response
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DeployApi(api_client)
+                name = 'example_name'
+                deploy_releases: DeployReleases = paas.openapi_client.DeployReleases()
+                deploy_releases.source_id = 'example_source_id'
+                deploy_releases.type = 'example_type'
+                deploy_releases.port = 3000
+
+                try:
+                    api_response: ReleasesDeploy200Response = api_instance.releases_deploy(name, deploy_releases)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          sources_deploy: |
+            import paas.openapi_client
+            from paas.openapi_client.models.sources_deploy200_response import SourcesDeploy200Response
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DeployApi(api_client)
+                name = 'example'
+                file = './example.tar.gz'
+
+                try:
+                    api_response: SourcesDeploy200Response = api_instance.sources_deploy(name, file)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       DisksApi:
         examples:
-          createBackup:
-          createDisk:
-          createFtp:
-          deleteDisk:
-          deleteFtp:
-          downloadBackup:
-          getBackups:
-          getDisks:
-          getFtps:
-          resizeDisk:
+          create_backup: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                id = 'id_example'
+                name = 'name_example'
+
+                try:
+                    api_instance.create_backup(id, name)
+                except ApiException as e:
+                    print(e)
+          create_disk: |
+            import paas.openapi_client
+            from paas.openapi_client.models.create_disk_request import CreateDiskRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                name = 'name_example'
+                disk: CreateDiskRequest = paas.openapi_client.CreateDiskRequest()
+                disk.name = 'name_example' 
+                disk.size = 'size_example' 
+
+                try:
+                    api_instance.create_disk(name, disk)
+                except ApiException as e:
+                    print(e)
+          create_ftp: |
+            import paas.openapi_client
+            from paas.openapi_client.models.create_ftp200_response import CreateFtp200Response
+            from paas.openapi_client.models.create_ftp_request import CreateFtpRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                name = 'name_example' 
+                dname = 'dname_example'
+                create_ftp: CreateFtpRequest = paas.openapi_client.CreateFtpRequest()
+                create_ftp.username = 'username_example'
+                create_ftp.read_only = True
+
+                try:
+                    api_response: CreateFtp200Response = api_instance.create_ftp(name, dname, create_ftp)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_disk: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                id = 'id_example'
+                name = 'name_example' 
+
+                try:
+                    api_instance.delete_disk(id, name)
+                except ApiException as e:
+                    print(e)
+          delete_ftp: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                fname = 'fname_example'
+
+                try:
+                    api_instance.delete_ftp(fname)
+                except ApiException as e:
+                    print(e)
+          download_backup: |
+            import paas.openapi_client
+            from paas.openapi_client.models.download_backup200_response import DownloadBackup200Response
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                id = 'id_example'
+                dname = 'dname_example'
+                bname = 'bname_example'
+
+                try:
+                    api_response: DownloadBackup200Response = api_instance.download_backup(id, dname, bname)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_backups: |
+            import paas.openapi_client
+            from paas.openapi_client.models.get_disk_backup import GetDiskBackup
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                id = 'id_example'
+                name = 'name_example'
+
+                try:
+                    api_response: GetDiskBackup = api_instance.get_backups(id, name)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_disks: |
+            import paas.openapi_client
+            from paas.openapi_client.models.get_disks import GetDisks
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                id = 'id_example'
+
+                try:
+                    api_response: GetDisks = api_instance.get_disks(id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_ftps: |
+            import paas.openapi_client
+            from paas.openapi_client.models.get_ftps200_response import GetFtps200Response
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                name = 'name_example'
+                dname = 'dname_example'
+
+                try:
+                    api_response: GetFtps200Response = api_instance.get_ftps(name, dname)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          resize_disk: |
+            import paas.openapi_client
+            from paas.openapi_client.models.resize_disk_request import ResizeDiskRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DisksApi(api_client)
+                name = 'name_example'
+                dname = 'dname_example'
+                resize_disk: ResizeDiskRequest = paas.openapi_client.ResizeDiskRequest()
+                resize_disk.size = 'size_example'
+                
+                try:
+                    api_instance.resize_disk(name, dname, resize_disk)
+                except ApiException as e:
+                    print(e)
       DomainsApi:
         examples:
-          checkDomain:
-          createAppDomain:
-          deleteDomain:
-          disableSsl:
-          enableSsl:
-          getAppDomains:
-          redirectDomain:
-          setAppDomain:
+          check_domain: |
+            import paas.openapi_client
+            from paas.openapi_client.models.check_domain import CheckDomain
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                id = 'id_example'
+                
+                try:
+                    api_response:CheckDomain = api_instance.check_domain(id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          create_app_domain	: |
+            import paas.openapi_client
+            from paas.openapi_client.models.create_app_domain201_response import CreateAppDomain201Response
+            from paas.openapi_client.models.create_app_domain_request import CreateAppDomainRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                domain: CreateAppDomainRequest = paas.openapi_client.CreateAppDomainRequest()
+                domain.name = 'name_example'
+                domain.project = 'project_example'
+                domain.type = 'type_example'
+                
+                try:
+                    api_response:CreateAppDomain201Response = api_instance.create_app_domain(domain)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_domain: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                id = 'id_example'
+                
+                try:
+                    api_instance.delete_domain(id)
+                except ApiException as e:
+                    print(e)
+          disable_ssl: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                id = 'id_example'
+                
+                try:
+                    api_instance.disable_ssl(id)
+                except ApiException as e:
+                    print(e)
+          enable_ssl: |
+            import paas.openapi_client
+            from paas.openapi_client.models.enable_ssl200_response import EnableSsl200Response
+            from paas.openapi_client.models.enable_ssl_request import EnableSslRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                domain: EnableSslRequest = paas.openapi_client.EnableSslRequest()
+                domain.domain = "example.com"
+                
+                try:
+                    api_response: EnableSsl200Response = api_instance.enable_ssl(domain)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_app_domains: |
+            import paas.openapi_client
+            from paas.openapi_client.models.domains import Domains
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                project = 'project_example'
+                
+                try:
+                    api_response: Domains = api_instance.get_app_domains(project)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          redirect_domain: |
+            import paas.openapi_client
+            from paas.openapi_client.models.redirect_domain_request import RedirectDomainRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                id = 'id_example'
+                domain: RedirectDomainRequest = paas.openapi_client.RedirectDomainRequest()
+                domain.redirect_status = 302 # 301 or 302
+                domain.redirect_to = 'example.com'
+                
+                try:
+                    api_instance.redirect_domain(id, domain)
+                except ApiException as e:
+                    print(e)
+          set_app_domain: |
+            import paas.openapi_client
+            from paas.openapi_client.models.set_app_domain_request import SetAppDomainRequest
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.DomainsApi(api_client)
+                domain: SetAppDomainRequest = paas.openapi_client.SetAppDomainRequest()
+                domain.domain_id = 'example_domain_id'
+                domain.project_id = 'example_project_id'
+                
+                try:
+                    api_instance.set_app_domain(domain)
+                except ApiException as e:
+                    print(e)
       ReportsApi:
         examples:
-          getAppCpuReports:
-          getAppMemoryReports:
-          getAppNetworkReceiveReports:
-          getAppSummaryReports:
-          getNetworkTransmitReports:
+          get_app_cpu_reports: |
+            import paas.openapi_client
+            from paas.openapi_client.models.reports import Reports
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.ReportsApi(api_client)
+                name = 'name_example'
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_app_cpu_reports(name, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_app_memory_reports: |
+            import paas.openapi_client
+            from paas.openapi_client.models.reports import Reports
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.ReportsApi(api_client)
+                name = 'name_example'
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_app_memory_reports(name, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_app_network_receive_reports: |
+            import paas.openapi_client
+            from paas.openapi_client.models.reports import Reports
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.ReportsApi(api_client)
+                name = 'name_example'
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_app_network_receive_reports(name, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_app_summary_reports: |
+            import paas.openapi_client
+            from paas.openapi_client.models.get_app_summary_reports200_response import GetAppSummaryReports200Response
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.ReportsApi(api_client)
+                name = 'name_example'
+                
+                try:
+                    api_response: GetAppSummaryReports200Response = api_instance.get_app_summary_reports(name)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_network_transmit_reports: |
+            import paas.openapi_client
+            from paas.openapi_client.models.reports import Reports
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.ReportsApi(api_client)
+                name = 'name_example' 
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_network_transmit_reports(name, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       SettingsApi:
         examples:
-          defaultSubdomain:
-          ipStatic:
-          updateEnvs:
-          zeroDowntime:
+          default_subdomain: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.SettingsApi(api_client)
+                id = 'id_example'
+                status = 'status_example'
+                
+                try:
+                    api_instance.default_subdomain(id, status)
+                except ApiException as e:
+                    print(e)
+          ip_static: |
+            import paas.openapi_client
+            from paas.openapi_client.models.ip_static200_response import IpStatic200Response
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.SettingsApi(api_client)
+                id = 'id_example'
+                status = 'status_example'
+                
+                try:
+                    api_response: IpStatic200Response = api_instance.ip_static(id, status)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          update_envs: |
+            import paas.openapi_client
+            from paas.openapi_client.models.update_envs import UpdateEnvs
+            from paas.openapi_client.models.update_envs200_response import UpdateEnvs200Response
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.SettingsApi(api_client)
+                update_envs: UpdateEnvs = paas.openapi_client.UpdateEnvs()
+                update_envs.project = 'project_example'
+                update_envs.variables = [
+                    {
+                        "key": "key_example",
+                        "value": "value_example"
+                    }
+                ]
+                
+                try:
+                    api_response: UpdateEnvs200Response = api_instance.update_envs(update_envs)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          zero_downtime: |
+            import paas.openapi_client
+            from paas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with paas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = paas.openapi_client.SettingsApi(api_client)
+                id = 'id_example'
+                status = 'status_example'
+                
+                try:
+                    api_instance.zero_downtime(id, status)
+                except ApiException as e:
+                    print(e)
   dbaas:
     readme:
     classes:
