@@ -1726,40 +1726,441 @@ sdks:
                 except ApiException as e:
                     print(e)
   object-storage:
-    readme:
+    readme: |
+        import object_storage.openapi_client
+        from object_storage.openapi_client.models.list_bucket import ListBucket
+        from object_storage.openapi_client.rest import ApiException
+        from pprint import pprint
+
+        with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+            api_instance = object_storage.openapi_client.BucketApi(api_client)
+            
+            try:
+                api_response: ListBucket = api_instance.get_buckets()
+                
+                pprint(api_response)
+            except ApiException as e:
+                print(e)
     classes:
       BucketApi:
         examples:
-          changeBucketAccess:
-          checkBucket:
-          createBucket:
-          destroyBucket:
-          getBuckets:
-          getListPreviousBuckets:
-          getMigrations:
-          getSingleBuckets:
-          migratingBuckets:
-          upgradeBucket:
+          change_bucket_access: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.change_bucket_access200_response import ChangeBucketAccess200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)    
+                bucket = 'bucket_example'
+                permission = 'permission_example'
+                
+                try:
+                    api_response: ChangeBucketAccess200Response = api_instance.change_bucket_access(bucket, permission)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          check_bucket: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.create_bucket201_response import CreateBucket201Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)    
+                bucket = 'bucket_example'
+                
+                try:
+                    api_response: CreateBucket201Response = api_instance.check_bucket(bucket)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          create_bucket: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.create_bucket import CreateBucket
+            from object_storage.openapi_client.models.create_bucket201_response import CreateBucket201Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client) 
+                body: CreateBucket = object_storage.openapi_client.CreateBucket(
+                    name = 'name_example',
+                    plan = 'plan_example',
+                    permission = 'permission_example',
+                )
+                
+                try:
+                    api_response: CreateBucket201Response = api_instance.create_bucket(body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          destroy_bucket: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)
+                bucket = 'bucket_example'
+                
+                try:
+                    api_instance.destroy_bucket(bucket)
+                except ApiException as e:
+                    print(e)
+          get_buckets: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.list_bucket import ListBucket
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)
+                
+                try:
+                    api_response: ListBucket = api_instance.get_buckets()
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_list_previous_buckets: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)
+                
+                try:
+                    api_instance.get_list_previous_buckets()
+                except ApiException as e:
+                    print(e)
+          get_migrations: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.get_migrations200_response import GetMigrations200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)
+                
+                try:
+                    api_response: GetMigrations200Response = api_instance.get_migrations()
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_single_buckets: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.get_single_buckets200_response import GetSingleBuckets200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)
+                bucket = 'bucket_example'
+                
+                try:
+                    api_response: GetSingleBuckets200Response = api_instance.get_single_buckets(bucket)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          migrating_buckets: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.migrate_bucket import MigrateBucket
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)
+                body: MigrateBucket = object_storage.openapi_client.MigrateBucket(
+                    var_from = 'var_from_example',
+                    to = 'to_example',
+                    path = 'path_example'
+                )
+                
+                try:
+                    api_instance.migrating_buckets(body)
+                except ApiException as e:
+                    print(e)
+          upgrade_bucket: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.upgrade_bucket200_response import UpgradeBucket200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.BucketApi(api_client)
+                bucket = 'bucket_example'
+                plan = 'plan_example'
+                
+                try:
+                    api_response: UpgradeBucket200Response = api_instance.upgrade_bucket(bucket, plan)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       FolderApi:
         examples:
-          createFolder:
-          deleteFolder:
+          create_folder: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.create_folder import CreateFolder
+            from object_storage.openapi_client.models.create_folder201_response import CreateFolder201Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                bucket = 'bucket_example' 
+                body: CreateFolder = object_storage.openapi_client.CreateFolder(
+                    path = 'path_example'
+                )
+                
+                try:
+                    api_response: CreateFolder201Response = api_instance.create_folder(bucket, body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_folder: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                bucket = 'bucket_example' 
+                path = 'path_example'
+                
+                try:
+                    api_instance.delete_folder(bucket, path)
+                except ApiException as e:
+                    print(e)
       KeyApi:
         examples:
-          createKey:
-          deleteKey:
-          getKey:
-          getListKeys:
-          revokeSecretKey:
-          updateKey:
+          create_key: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.create_key import CreateKey
+            from object_storage.openapi_client.models.create_key201_response import CreateKey201Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                body: CreateKey = object_storage.openapi_client.CreateKey(
+                    buckets = 'buckets_example',
+                    description = 'description_example'
+                )
+                
+                try:
+                    api_response: CreateKey201Response = api_instance.create_key(body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_key: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                key = 'key_example'
+                
+                try:
+                    api_instance.delete_key(key)
+                except ApiException as e:
+                    print(e)
+          get_key: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                key = 'key_example'
+                
+                try:
+                    api_instance.get_key(key)
+                except ApiException as e:
+                    print(e)
+          get_list_keys: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.keys import Keys
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                
+                try:
+                    api_response: Keys = api_instance.get_list_keys()
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          revoke_secret_key: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.revoke_secret_key200_response import RevokeSecretKey200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                key = 'key_example' 
+                
+                try:
+                    api_response: RevokeSecretKey200Response = api_instance.revoke_secret_key(key)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          update_key: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.create_bucket201_response import CreateBucket201Response
+            from object_storage.openapi_client.models.create_key import CreateKey
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.FolderApi(api_client)
+                key = 'key_example' 
+                body: CreateKey = object_storage.openapi_client.CreateKey(
+                    buckets = [
+                        {}
+                    ],
+                    description = 'description_example'
+                )
+                
+                try:
+                    api_response: CreateBucket201Response = api_instance.update_key(key, body)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       MetricsApi:
         examples:
-          getHisotricalMetrics:
-          getMetricsSummary:
+          get_hisotrical_metrics: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.get_hisotrical_metrics200_response import GetHisotricalMetrics200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.MetricsApi(api_client)
+                bucket = 'bucket_example'
+                since = 'since_example'
+                
+                try:
+                    api_response: GetHisotricalMetrics200Response = api_instance.get_hisotrical_metrics(bucket, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_metrics_summary: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.get_metrics_summary200_response import GetMetricsSummary200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.MetricsApi(api_client)
+                bucket = 'bucket_example'
+                
+                try:
+                    api_response: GetMetricsSummary200Response = api_instance.get_metrics_summary(bucket)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       ObjectApi:
         examples:
-          deleteObject:
-          downloadObject:
-          getListObjects:
-          getStatObject:
-          uploadObject:
+          delete_object: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.ObjectApi(api_client)
+                bucket = 'bucket_example' # str | 
+                prefix = 'prefix_example'
+                
+                try:
+                    api_instance.delete_object(bucket, prefix)
+                except ApiException as e:
+                    print(e)
+          download_object: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.download_object200_response import DownloadObject200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.ObjectApi(api_client)
+                bucket = 'bucket_example' 
+                object = 'object_example' 
+                expiry = 'expiry_example'
+                
+                try:
+                    api_response: DownloadObject200Response = api_instance.download_object(bucket, object, expiry=expiry)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_list_objects: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.objects import Objects
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.ObjectApi(api_client)
+                bucket = 'bucket_example'  
+                prefix = 'prefix_example'  
+                number = 'number_example' 
+                page = 'page_example'
+                
+                try:
+                    api_response: Objects = api_instance.get_list_objects(bucket, prefix, number=number, page=page)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_stat_object: |
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.stat import Stat
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.ObjectApi(api_client)
+                bucket = 'bucket_example'
+                object = 'object_example'
+                
+                try:
+                    api_response: Stat = api_instance.get_stat_object(bucket, object)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          upload_object: | 
+            import object_storage.openapi_client
+            from object_storage.openapi_client.models.download_object200_response import DownloadObject200Response
+            from object_storage.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with object_storage.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = object_storage.openapi_client.ObjectApi(api_client)
+                bucket = 'bucket_example'
+                object = 'object_example'
+                
+                try:
+                    api_response: DownloadObject200Response = api_instance.upload_object(bucket, object)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
