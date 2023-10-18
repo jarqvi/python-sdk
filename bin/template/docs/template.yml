@@ -1437,30 +1437,294 @@ sdks:
                 except ApiException as e:
                     print(e)
   dbaas:
-    readme:
+    readme: |
+        import dbaas.openapi_client
+        from dbaas.openapi_client.rest import ApiException
+        from dbaas.openapi_client.models.dbs_details import DBsDetails
+        from pprint import pprint
+
+        with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+            api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+            
+            try:
+                api_response: DBsDetails = api_instance.get_list_databases()
+                
+                pprint(api_response)
+            except ApiException as e:
+                print(e)
     classes:
       BackupsApi:
         examples:
-          createBackup:
-          downloadBackup:
-          getListBackups:
+          create_backup: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.BackupsApi(api_client)
+                id = 'id_example' 
+                
+                try:
+                    api_instance.create_backup(id)
+                except ApiException as e:
+                    print(e)
+          download_backup: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.download_backup200_response import DownloadBackup200Response
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.BackupsApi(api_client)
+                id = 'id_example'
+                name = 'name_example'
+                
+                try:
+                    api_response: DownloadBackup200Response = api_instance.download_backup(id, name)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_list_backups: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.get_list_backups200_response import GetListBackups200Response
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.BackupsApi(api_client)
+                id = 'id_example'
+                
+                try:
+                    api_response: GetListBackups200Response = api_instance.get_list_backups(id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
       DatabasesApi:
         examples:
-          changeControlPanel:
-          changePublicNetwork:
-          createDatabase:
-          deleteDatabase:
-          getDatabase:
-          getListDatabases:
-          resizeDatabase:
-          turnDatabase:
+          change_control_panel: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.change_control_panel200_response import ChangeControlPanel200Response
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                id = 'id_example'
+                status = 'status_example'
+                
+                try:
+                    api_response: ChangeControlPanel200Response = api_instance.change_control_panel(id, status)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          change_public_network: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                id = 'id_example'
+                status = 'status_example'
+                
+                try:
+                    api_instance.change_public_network(id, status)
+                except ApiException as e:
+                    print(e)
+          create_database: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.create_database200_response import CreateDatabase200Response
+            from dbaas.openapi_client.models.create_databases import CreateDatabases
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                create_a_databases: CreateDatabases = dbaas.openapi_client.CreateDatabases(
+                    hostname = 'hostname_example',
+                    options = {
+                        "standaloneReplicaSet": True,
+                    },
+                    publicNetwork = True,
+                    type = 'type_example',
+                    planID = 'planID_example',
+                    version = 'version_example'
+                )
+                
+                try:
+                    api_response: CreateDatabase200Response = api_instance.create_database(create_a_databases)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          delete_database: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                id = 'id_example'
+                
+                try:
+                    api_instance.delete_database(id)
+                except ApiException as e:
+                    print(e)
+          get_database: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.db_details import DBDetails
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                id = 'id_example'
+                
+                try:
+                    api_response: DBDetails = api_instance.get_database(id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_list_databases: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.rest import ApiException
+            from dbaas.openapi_client.models.dbs_details import DBsDetails
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                
+                try:
+                    api_response: DBsDetails = api_instance.get_list_databases()
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          resize_database: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.resize_database_request import ResizeDatabaseRequest
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                id = 'id_example' 
+                resize: ResizeDatabaseRequest = dbaas.openapi_client.ResizeDatabaseRequest(
+                    disk = True,
+                    planID = "planID_example",
+                )
+                
+                try:
+                    api_instance.resize_database(id, resize)
+                except ApiException as e:
+                    print(e)
+          turn_database: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.turn_database_request import TurnDatabaseRequest
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.DatabasesApi(api_client)
+                id = 'id_example'
+                scale: TurnDatabaseRequest = dbaas.openapi_client.TurnDatabaseRequest(
+                    scale = 1
+                )
+                
+                try:
+                    api_instance.turn_database(id, scale)
+                except ApiException as e:
+                    print(e)
       ReportsApi:
         examples:
-          getDatabaseCpuReports:
-          getDatabaseMemoryReports:
-          getDatabaseNetworkReceiveReports:
-          getDatabaseNetworkTransmitReports:
-          getDatabaseSummaryReports:
+          get_database_cpu_reports: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.reports import Reports
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.ReportsApi(api_client)
+                id = 'id_example'
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_database_cpu_reports(id, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_database_memory_reports: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.reports import Reports
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.ReportsApi(api_client)
+                id = 'id_example'
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_database_memory_reports(id, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_database_network_receive_reports: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.reports import Reports
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.ReportsApi(api_client)
+                id = 'id_example'
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_database_network_receive_reports(id, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_database_network_transmit_reports: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.reports import Reports
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.ReportsApi(api_client)
+                id = 'id_example'
+                since = 3.4 
+                
+                try:
+                    api_response: Reports = api_instance.get_database_network_transmit_reports(id, since)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
+          get_database_summary_reports: |
+            import dbaas.openapi_client
+            from dbaas.openapi_client.models.get_database_summary_reports200_response import GetDatabaseSummaryReports200Response
+            from dbaas.openapi_client.rest import ApiException
+            from pprint import pprint
+
+            with dbaas.create_sdk("YOUR-API-TOKEN") as api_client:
+                api_instance = dbaas.openapi_client.ReportsApi(api_client)
+                id = 'id_example'
+                
+                try:
+                    api_response: GetDatabaseSummaryReports200Response = api_instance.get_database_summary_reports(id)
+                    
+                    pprint(api_response)
+                except ApiException as e:
+                    print(e)
   object-storage:
     readme:
     classes:
